@@ -69,8 +69,8 @@ API設計においては、エンドポイントの設計からHTTPメソッド�
 
 ## 開発環境
 
-OS: Linux Mint 21.3 (ubuntu 22.04)
-エディタ: Vim, Neovim
+- OS: Linux Mint 21.3 (ubuntu 22.04)
+- エディタ: Vim, Neovim
 
 ### 学習と課題
 
@@ -120,8 +120,8 @@ JavaScriptを活用してデータの絞り込みや並べ替え機能を実装�
 
 ## 開発環境
 
-OS: Linux Mint 21.3 (ubuntu 22.04)
-エディタ: Vim, Neovim
+- OS: Linux Mint 21.3 (ubuntu 22.04)
+- エディタ: Vim, Neovim
 
 ## 学習と課題
 
