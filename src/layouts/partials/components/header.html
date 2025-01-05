@@ -1,0 +1,6 @@
+<nav>
+    <a href={{ .Site.BaseURL }}>Home</a>
+    {{ if .Parent.Section }}
+    &gt; <a href={{ .Parent.Permalink }}>{{ .Parent.LinkTitle }}</a>
+    {{ end }}
+</nav>

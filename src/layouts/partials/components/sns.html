@@ -1,0 +1,51 @@
+<div class='sns'> 
+    <div class="sns-item">
+        <a class='sns-link' href="https://twitter.com/share?url={{ .Permalink }}&text={{ .Title }}" title='このページをツイートする' rel='noopener noreferrer nofollow'>
+            <div class='twitter'>
+                <span class='snstext'>twitter<span class="spnone">でシェア</span></span>
+            </div>
+        </a>
+    </div>
+    <div class="sns-item">
+        <a class='sns-link' href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}&t={{ .Title }}" title='facebookでシェア' target="_blank" rel="noopener noreferrer nofollow">
+            <div class='facebook'>
+                <span class='snstext'>facebook<span class="spnone">でシェア</span></span>
+            </div>
+        </a>
+    </div>
+    <div class="sns-item">
+        <a class='sns-link' href="https://getpocket.com/edit?url={{ .Permalink }}&title={{ .Title }}" title='pocketに保存' target="_blank" aria-label='pocket_button' rel="noopener noreferrer nofollow">
+            <div class='pocket'>
+                <span class='snstext'>pocket<span class="spnone">に保存</span></span>
+            </div>
+        </a>
+    </div>
+    <div class="sns-item">
+        <a class='sns-link hatena-bookmark-button' href="https://b.hatena.ne.jp/entry/{{ .Permalink }}" data-hatena-bookmark-layout="simple" title='はてなブックマーク' aria-label="hatebu_button" rel="noopener nofollow">
+            <div class='hatena'>
+                <span class='snstext'>はてブ<span class="spnone">で保存</span></span>
+            </div>
+        </a>
+    </div>
+    <div class="sns-item">
+        <a class='sns-link' href="https://line.me/R/msg/text/?{{ .Title }}%0D%0A{{ .Permalink }}" target="_blank" title='LINEで送る' rel="noopener noreferrer nofollow">
+            <div class='line'>
+                <span class='snstext'>LINE<span class="spnone">でシェア</span></span>
+            </div>
+        </a>
+        </div>
+    <div class="sns-item pcnone">
+        <div id="shareAPI" class="sns-link" tabIndex="0" title='スマホの場合、Share APIで共有できます' onclick="if (navigator.share) { navigator.share({title: document.title, text: document.title, url: location.href}) } else { alert('このブラウザはシェア機能に対応してません。\nアドレスをコピーしてシェアしてください。')}">
+            <div class="shareAPI">
+                <span class='snstext'>Share API<span class="spnone"> (※スマホのみ)</span></span>
+            </div>
+        </div>
+    </div>
+    <div class="sns-item w100">
+        <div id='clipboard' class="sns-link" tabIndex="0" title='このページのタイトルとURLをコピーする'>
+            <div class='clipboard' >
+                <span class='snstext'>タイトルとURLをコピーする</span>
+            </div>
+        </div>
+    </div>
+</div>

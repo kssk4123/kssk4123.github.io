@@ -1,0 +1,13 @@
+{{ partial "meta/head" . }}
+<body>
+    <main>
+        <article>
+            {{- block "main" . }}
+                not found main block
+            {{- end }}
+        </article>
+    </main>
+    {{/* partial "components/footer" .  */}}
+    {{- if .Site.IsServer }}{{ partial "components/develop-only" . }}{{ end }}
+</body>
+</html>

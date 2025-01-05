@@ -1,0 +1,57 @@
+{{- define "ListItems" -}} 
+    {{- $ParentPermalink := .Parent.Permalink -}}
+    {{- $Permalink := .Permalink -}}
+    {{- $AttackOnTitan := "attack-on-titan" -}}
+    {{- $Section := .Section -}}
+    {{- if eq $Section $AttackOnTitan -}}
+    [
+        {
+            "@type": "ListItem",
+            "position": "1",
+            "item":
+                {
+                    "@id": {{ .Site.BaseURL -}},
+                    "name": "HOME",
+                }
+        },
+        {
+            "@type": "ListItem",
+            "position": "2",
+            "item":
+                {
+                    "@id": {{ .Site.BaseURL -}}attack-on-titan/,
+                    "name": "進撃の巨人",
+                }
+        },
+        {{- range $index, $val := .Site.Data.breadcrumb -}}
+        {{- $valURL := add $.Site.BaseURL $val.url -}}
+            {{- if eq $Permalink $valURL -}}
+                {
+                    "@type": "ListItem",
+                    "position": "3",
+                    "item":
+                        {
+                            "@id": {{- $valURL -}},
+                            "name": "{{- $val.title -}}",
+                        }
+                }
+            {{- else if eq $ParentPermalink $valURL -}}
+                {
+                    "@type": "ListItem",
+                    "position": "3",
+                    "item":
+                        {
+                            "@id": {{ $valURL -}},
+                            "name": "{{ $val.title -}}",
+                        }
+                }
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+    ]
+{{- end -}}
+{
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": {{- block "ListItems" . -}}{{- end -}},
+}

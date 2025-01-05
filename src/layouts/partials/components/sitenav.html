@@ -1,0 +1,13 @@
+<nav id="sitenav">
+    <ul class="menu">
+        <li class="menu-item"><a class="menu-link" href={{ .Site.BaseURL }}/b/>ブログ</a></li>
+        <li class="menu-item"><a class="menu-link" href={{ .Site.BaseURL }}/films/>観た映画</a></li>
+        <li class="menu-item"><a class="menu-link" href={{ .Site.BaseURL }}/schedule/>スケジュール</a></li>
+        <li class="menu-item"><a class="menu-link" href={{ .Site.BaseURL }}/about/>管理者</a></li>
+        <li class="menu-item"><a class="menu-link" href={{ .Site.BaseURL }}/search/>検索</a></li>
+        {{- if .IsHome -}}
+        <li class="menu-item add-margin-top"><a class="menu-link" href={{ .Site.BaseURL }}/privacy-policy/>プライバシーポリシー</a></li>
+        <li class="menu-item"><a class="menu-link" href={{ .Site.BaseURL }}/contact/>お問い合わせ</a></li>
+        {{- end }}
+    </ul>
+</nav>

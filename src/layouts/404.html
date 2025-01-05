@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width" name=viewport>
+    <title>404 Not Found - さささ</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            background: #eee;
+        }
+        h1 {
+            text-align: center;
+        }
+        .gsc-control-cse {
+            background-color: inherit!important;
+            border: 0!important;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>404 Not Found</h1>
+        <p>お探しのページは見つかりませんでした。</p>
+        <p>すでに削除されているか、URLが間違っています。</p>
+        <p>下記から検索すれば見つかるかもしれません。</p>
+        <div class="gcse-search"></div>
+        <p><a href="/">トップページへ移動する</a></p>
+    </div>
+    <script async src="https://cse.google.com/cse.js?cx=61328502e826f42a3">
+    </script>
+    {{- if .Site.IsServer }}{{ partial "components/develop-only" . }}{{ end }}
+</body>
+</html>

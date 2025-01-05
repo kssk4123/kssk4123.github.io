@@ -1,0 +1,21 @@
+{
+"@context": "http://schema.org",
+"@graph": 
+        {
+            "@type": "imageObject",
+            "url": {{ .Site.Params.logoImage | absURL }},
+            "caption": {{ .Site.Params.logoImageCaption }}
+        }
+{{- $img := findRE "src=\"([^\"]*)" .Content}} 
+{{- $imgalt := findRE "alt=\"([^\"]*)" .Content }}
+{{- if $img }}
+    {{- range $index, $src := $img }}
+        ,
+        {
+            "@type": "imageObject",
+            "url": {{ $src | replaceRE "src=\"" "$1" | absURL }},
+            "caption": "{{ (index $imgalt $index) | replaceRE "alt=\"" "$1" }}",
+        }
+    {{- end }}
+{{- end }}
+}

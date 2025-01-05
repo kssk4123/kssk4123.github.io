@@ -1,0 +1,22 @@
+baseURL = "https://kssk4123.github.io"
+title = ""
+DefaultContentLanguage = "ja"
+languageCode = "ja-JP"
+disableHugoGeneratorInject = true
+enableRobotsTXT = true 
+pygmentsUseClasses = true
+pygmentsCodefences = true
+
+disableKinds = ["RSS", "taxonomy"]
+ignoreErrors = ["error-disable-taxonomy"]
+
+publishDir = "../docs"
+
+[frontmatter]
+date = ["datePublished"]
+
+[markup.goldmark.renderer]
+    unsafe = true
+
+[markup.goldmark.parser]
+    autoheadingID = false

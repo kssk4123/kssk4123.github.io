@@ -1,0 +1,121 @@
+<script type="application/ld+json">
+{{- $WebSite := add .Site.BaseURL "#website" }}
+{{- $WebPage := add .Permalink "#webpage" }}
+{{- $Article := add .Permalink "#article" }}
+{{- $Org := add .Site.BaseURL "#organization" }}
+{{- $Logo := add .Site.BaseURL "#logo" }}
+{
+    "@context": "https://schema.org",
+    "@graph":
+    [
+        {
+            "@type": "Organization",
+            "@id": {{ $Org }},
+            "name": {{ .Site.Title }},
+            "url": {{ .Site.BaseURL }},
+            "sameAs": [
+                {{ .Site.Author.twitter }}
+            ],
+            "logo": {
+                "@type":"ImageObject",
+                "@id": {{ $Logo }},
+                "url": {{ .Site.Params.logoImage | absURL }},
+                "height": {{ .Site.Params.logoImageHeight }},
+                "width": {{ .Site.Params.logoImageWidth }},
+                "caption": {{ .Site.Author.name }}
+            },
+            "image": {
+                "@id": {{ $Logo }}
+            }
+        },
+        {
+            "@type": "WebSite",
+            "@id": {{ $WebSite }},
+            "url": {{ .Site.BaseURL }},
+            "name":"{{ .Site.Title }}",
+            "inLanguage": {{ .Site.Params.inLanguage }},
+            "description": {{ .Site.Params.description }},
+            "publisher": {
+                "@id": {{ $Org }}
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {{ add .Site.BaseURL "/search/#{search_term_string}" }},
+                "query-input": "required name=search_term_string"
+            }
+        },
+        {
+            "@type": "ImageObject",
+            "@id": {{ add .Permalink "#primaryimage" }},
+            "url": {{- with .Params.heroImage }}{{ . | absURL }}{{ else }}{{ .Site.Params.defaultImage | absURL }}{{ end }},
+            "height": {{- with .Params.heroImage }}"{{ (imageConfig (add "/content" .)).Height }}"{{ else }}{{ .Site.Params.defaultImageHeight }}{{ end }},
+            "width": {{- with .Params.heroImage }}"{{ (imageConfig (add "/content" .)).Width }}"{{ else }}{{ .Site.Params.defaultImageWidth }}{{ end }},
+            "caption": {{- with .Params.heroImageAlt }}{{ . }}{{ else }}{{ .Title }}{{ end }}
+        },
+        {
+            "@type": "WebPage",
+            "@id": {{ add .Permalink "#webpage" }},
+            "url": {{ .Permalink }},
+            "inLanguage": {{ .Site.Params.inLanguage }},
+            "name": {{ .Title }},
+            "isPartOf": {
+                "@id": {{ $WebSite }}
+            },
+            "primaryImageOfPage":{
+                "@id": {{ add .Permalink "#primaryimage" }}
+            },
+            "description": {{- with .Params.description }}"{{ . }}"{{ else }}"{{ .Description }}"{{ end }}
+        },
+        {
+            "@type":"Article",
+            "@id" : {{ $Article }},
+            "isPartOf": {
+                "@id": {{ $WebPage }}
+            },
+            "author": {
+                "@id": {{ add .Site.BaseURL "about/#author" }},
+                "name": {{ .Site.Author.name }}
+            },
+            "publisher": {
+                "@id": {{ $Org}}
+            },
+            "headline": "{{ .Title }}",
+            "datePublished": {{- with .Params.datePublished }}{{ . }}{{ else }}"2020-01-01T22:22:22+09:00"{{ end }},
+            "dateModified": {{- with .Params.dateModified }}{{ . }}{{ else }}"2020-01-11T10:08:14+09:00"{{ end }},
+            "mainEntityOfPage": {{ add .Permalink "#webpage" }},
+            "image": [
+                {
+                    "@id": {{ add .Permalink "#primaryimage" }}
+                }
+            {{- $img := findRE `<img src=\"([^\"]*)` .Content }} 
+            {{- $imgalt := findRE "alt=\"([^\"]*)" .Content }}
+            {{- if $img }}
+                {{- range $index, $src := $img }}
+                ,{
+                    {{ $src := . | replaceRE `<img src=\"` "$1" | absURL }}
+                    "@type": "imageObject",
+                    "url": {{ $src }},
+                    "caption": "{{ (index $imgalt $index) | replaceRE "alt=\"" "$1" }}"
+                }
+                {{- end -}}
+            {{- end -}}
+            ],
+            "inLanguage": {{ .Site.Params.inLanguage }}
+        },
+        {
+            "@type": "Person",
+            "@id": {{ add .Site.BaseURL "about/#author" }},
+            "name":"{{ .Site.Author.name }}",
+            "image": {
+                "@id": {{ add .Site.BaseURL "#logo" }}
+            },
+            "description": "{{ .Site.Params.description }}",
+            "mainEntityOfPage": {{ add .Site.BaseURL "about/#author" }},
+            "url": {{ add .Site.BaseURL "about/" }},
+            "sameAs": [
+                {{ .Site.Author.twitter }}
+            ]
+        }
+    ]
+}
+</script>

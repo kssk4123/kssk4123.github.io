@@ -1,0 +1,22 @@
+{{- define "main" }}
+    {{- .Content }}
+    {{- $pages := .Pages.GroupByDate "2006" }}
+    <!-- 年ごとの一覧 -->
+    <hr>
+    {{- range $pages }}
+        <ul id={{ .Key }}>
+        {{- range .Pages }}
+            {{- $pubdate := .Params.datePublished }}
+            <li>
+                <time datetime={{- dateFormat "2006-01-02T15:04:05" $pubdate  }}+09:00>{{- substr $pubdate 0 10 }}</time>:&nbsp;
+                <a  href="{{- .Permalink }}">
+                    {{ if .Site.IsServer }}{{- with .Params.draft -}}<span class="red">draft </span>{{- end -}}{{- end -}}
+                    {{- .Title -}}
+                </a>
+            </li>
+        {{- end }}
+        </ul>
+        <hr>
+    {{- end }}
+{{- end }}
+

@@ -1,0 +1,104 @@
+<!--
+    develop mode (.Site.IsServer) でのみ使われる
+    dir: 
+        layout/:
+        - index.html
+        - partials/_default/baseof.html
+        - partials/_default/searh.html
+        - partials/section/films.html
+    css:
+        assets/develop-only.css
+-->
+<div id="develop_mode_only-wrapper">
+    <div id="develop_mode_only-container">
+    <button id="ch-0" class="button-menu">▶</button>
+    <div id="develop_mode_only-content">
+    <div class="switch-box">
+        scheme: 
+        <button id="ch-2" class="button-toggle">to Light</button>,
+        info: 
+        <button id="ch-1" class="button-toggle">Close</button>,
+        storage:
+        <button id="remove" class="button-rm" title="remove session storage data">Remove</button>
+    </div>
+    <div id="display-1">
+<pre>.RelPermalink = {{ .RelPermalink }}
+.Section = {{ .Section }}
+.Type = {{ .Type }}
+.Kind = {{ .Kind }}
+.IsHome = {{ .IsHome }}
+.IsNode = {{ .IsNode }}
+.IsPage = {{ .IsPage }}
+.IsSection = {{ .IsSection }}
+.Parent = {{ .Parent }}
+.Next = {{ .Next }}
+.Prev = {{ .Prev }}
+</pre>
+</div><!-- display -->
+</div><!-- content -->
+</div><!-- container -->
+</div><!-- wrapper -->
+<script>
+(function () {
+    const isOsDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const scheme = document.getElementById('ch-2');
+    const html = document.documentElement;
+    const info = document.getElementById('ch-1');
+    const infoDisplay = document.getElementById('display-1');
+    const menu = document.getElementById('ch-0');
+    const box = document.getElementById('develop_mode_only-content');
+    const displayNone = 'display-none'
+    const menuClass = displayNone;
+    const schemeClass = 'dark-mode'
+    const displayClass = displayNone;
+    const keyMenu = 'menu';
+    const keyScheme = 'theme';
+    const keyDisplay = 'display';
+    const removeButton = document.getElementById('remove');
+    // SessionStorage から値を取得してセット
+    const menuState = sessionStorage.getItem(keyMenu);
+    const schemeState = sessionStorage.getItem(keyScheme);
+    const displayState = sessionStorage.getItem(keyDisplay);
+
+    if (schemeState) {
+        html.classList.add(schemeClass);
+        scheme.innerText = "to Light";
+    }
+    if (displayState) {
+        infoDisplay.classList.add(displayState);
+        info.innerText = "Open";
+    }
+    if (menuState) {
+        box.classList.add(menuState);
+        menu.innerText = "◀";
+    }
+
+    function setClassAndStorage(elm, cls, key) {
+        elm.classList.toggle(cls);
+        const mode = elm.className;
+        sessionStorage.setItem(key, mode);
+    }
+    function removeStorage(list) {
+        const data = list.forEach(key => sessionStorage.removeItem(key));
+        if (!data) {
+            alert('消去しました');
+        }
+    }
+
+    scheme.addEventListener('click', () => {
+        setClassAndStorage(html, schemeClass, keyScheme);
+        scheme.innerText = html.className === schemeClass ? 'to Light' : 'to Dark';
+    }, false);
+    info.addEventListener('click', () => {
+        setClassAndStorage(infoDisplay, displayClass, keyDisplay);
+        info.innerText = infoDisplay.className === displayClass ? 'Open' : 'Close';
+    }, false);
+    menu.addEventListener('click', () => {
+        setClassAndStorage(box, menuClass, keyMenu);
+        menu.innerText = box.className === menuClass ? '◀' : '▶';
+    }, false);
+    removeButton.addEventListener('click', () => {
+        removeStorage([keyMenu, keyScheme, keyDisplay]); 
+    }, false);
+}());
+</script>

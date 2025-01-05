@@ -1,0 +1,18 @@
+{{- $t := (time.AsTime .).Weekday.String -}}
+(
+{{- if eq $t "Sunday" -}}
+    <span class="sunday">日</span>
+{{- else if eq $t "Saturday" -}}
+    <span class="saturday">土</span>
+{{- else if eq $t "Friday" -}}
+    <span class="t">金</span>
+{{- else if eq $t "Thursday" -}}
+    <span class="t">木</span>
+{{- else if eq $t "Wednesday" -}}
+    <span class="t">水</span>
+{{- else if eq $t "Tuesday" -}}
+    <span class="t">火</span>
+{{- else if eq $t "Monday" -}}
+    <span class="t">月</span>
+{{- end -}}
+)

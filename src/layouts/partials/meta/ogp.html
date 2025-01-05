@@ -1,0 +1,14 @@
+<meta property="og:locale" content="{{ .Site.Params.localeOgp }}" />
+<meta property="fb:app_id" content="{{ .Site.Params.app_id }}">
+<meta property="og:type" content="{{ .Site.Params.ogType }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:title" content="{{ .Title }}" />
+<meta property="og:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+<meta property="og:image" content="{{ with .Params.heroImage }}{{ . | absURL }}{{ else }}{{ .Site.Params.defaultImage | absURL }}{{ end }}" />
+<meta name="twitter:card" content="{{ .Site.Params.twitterCard }}" />
+<meta name="twitter:site" content="{{ .Site.Params.twitterUsername }}" />
+<meta name="twitter:creator" content="{{ .Site.Params.twitterUsername }}" />
+<meta name="twitter:title" content="{{ .Title }}" />
+<meta name="twitter:description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}"  />
+<meta name="twitter:image" content="{{ with .Params.heroImage }}{{ . | absURL }}{{ else }}{{ .Site.Params.defaultImage | absURL }}{{ end }}" />
