@@ -63,7 +63,11 @@ API設計においては、エンドポイントの設計からHTTPメソッド�
 - デザイン: CSS3
 - インフラ: AWS EC2 (Ubuntu 24.04)
 - Web サーバー: Nginx
-- Docker (開発時。 MySQL, Air)
+- コンテナ: Docker (開発時。 MySQL, Air)
+
+## 開発環境
+
+エディタ: Neovim
 
 ### 学習と課題
 
@@ -109,6 +113,7 @@ JavaScriptを活用してデータの絞り込みや並べ替え機能を実装�
 - データ収集・加工: Python, Go
 - デザイン: CSS3
 - デプロイ: シェルスクリプト、rsync, Git Hooks
+- コンテナ: Docker (開発時。Air)
 
 ## 開発環境
 
