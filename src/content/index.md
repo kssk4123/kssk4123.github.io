@@ -2,7 +2,7 @@
 title: ポートフォリオ
 ---
 
-# Kenichiro Sasaki
+# Kenichiro Sasaki's Portfolio
 
 ---
 
